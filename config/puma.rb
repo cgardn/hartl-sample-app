@@ -24,8 +24,5 @@ on_worker_boot do
   ActiveRecord::Base.establish_connection
 end
 
-# Specifies the `pidfile` that Puma will use.
-pidfile ENV.fetch("PIDFILE") { "tmp/pids/server.pid" }
-
 # Allow puma to be restarted by `rails restart` command.
 plugin :tmp_restart
