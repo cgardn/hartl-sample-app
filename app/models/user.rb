@@ -12,7 +12,7 @@ class User < ApplicationRecord
                     uniqueness: { case_sensitive: false }
   has_secure_password
   validates :password, presence: true,
-                    length: { minimum: 9 }
+                    length: { minimum: 9 }, allow_nil: true
 
   # Returns the hash digest of the given string
   #   - used for generating test passwords for integration tests
