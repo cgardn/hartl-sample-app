@@ -2,6 +2,10 @@ require 'test_helper'
 
 class UsersSignupTest < ActionDispatch::IntegrationTest
 
+  def setup
+    ActionMailer::Base.deliveries.clear
+  end
+
   test "invalid signup information" do
     get signup_path
     assert_select 'form[action="/signup"]'
@@ -24,8 +28,8 @@ class UsersSignupTest < ActionDispatch::IntegrationTest
                                          password_confirmation: "testpassword" } }
     end
     follow_redirect!
-    assert_template 'users/show'
-    assert is_logged_in?
+#    assert_template 'users/show'
+#    assert is_logged_in?
     assert_not flash.empty?
 
   end

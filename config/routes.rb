@@ -11,4 +11,5 @@ Rails.application.routes.draw do
   patch '/users/:id/edit', to: 'users#update'
   # For details on the DSL available within this file, see http://guides.rubyonrails.org/routing.html
   resources :users, except: [:new, :create]
+  resources :account_activations, only: [:edit]
 end
