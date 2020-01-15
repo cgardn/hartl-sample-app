@@ -29,8 +29,3 @@
 
 # Ignore master key for decrypting credentials and more.
 /config/master.key
-
-# vim files
-*~
-*.un
-*.swp
