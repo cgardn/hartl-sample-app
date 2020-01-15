@@ -15,6 +15,15 @@ class User < ApplicationRecord
   validates :password, presence: true,
                     length: { minimum: 9 }, allow_nil: true
 
+  # Activates an account
+  def activate
+    update_columns(activated: true, activated_at: Time.zone.now)
+  end
+
+  def send_activation_email
+    UserMailer.account_activation(self).deliver_now
+  end
+
   # Returns the hash digest of the given string
   #   - used for generating test passwords for integration tests
   #     on login/logout and other things that require fake users
