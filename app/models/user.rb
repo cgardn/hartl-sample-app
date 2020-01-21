@@ -15,6 +15,9 @@ class User < ApplicationRecord
   validates :password, presence: true,
                     length: { minimum: 9 }, allow_nil: true
 
+  # Micropost association
+  has_many :microposts, dependent: :destroy
+
   # Activates an account
   def activate
     update_columns(activated: true, activated_at: Time.zone.now)
@@ -82,6 +85,12 @@ class User < ApplicationRecord
 
   def downcase_email
     self.email.downcase!
+  end
+
+  # Defines a proto-feed
+  # See "following users" in hartl tutorial for full explanation
+  def feed
+    Micropost.where("user_id = ?", id)
   end
 
   private
