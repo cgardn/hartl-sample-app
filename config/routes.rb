@@ -11,9 +11,19 @@ Rails.application.routes.draw do
   post '/login', to: 'sessions#create'
   delete '/logout', to: 'sessions#destroy'
   patch '/users/:id/edit', to: 'users#update'
-  # For details on the DSL available within this file, see http://guides.rubyonrails.org/routing.html
+
+  # member produces routes of the form:
+  #   - users/:id/following and 
+  #   - users/:id/followers 
+ 
+  resources :users do
+    member do
+      get :following, :followers
+    end
+  end
   resources :users, except: [:new, :create]
   resources :account_activations, only: [:edit]
   resources :password_resets, only: [:new, :create, :edit, :update]
   resources :microposts, only: [:create, :destroy]
+  resources :relationships, only: [:create, :destroy]
 end
